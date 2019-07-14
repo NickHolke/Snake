@@ -26,4 +26,17 @@ class Snake {
     this.xdir = x;
     this.ydir = y;
   }
+
+  eat(food) {
+    let head = this.body[this.body.length - 1];
+    if (food.x === head.x && food.y === head.y) {
+      return true;
+    }
+    return false;
+  }
+
+  grow() {
+    let head = this.body[this.body.length - 1].copy();
+    this.body.unshift(head);
+  }
 }
