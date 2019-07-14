@@ -3,7 +3,11 @@ class Snake {
     this.xdir = 0;
     this.ydir = 0;
     this.body = [];
-    this.body[0] = createVector(0, 0);
+    this.body[0] = createVector(floor(w/2), floor(h/2));
+  }
+
+  get score() {
+    return this.body.length;
   }
 
   update() {
@@ -38,5 +42,20 @@ class Snake {
   grow() {
     let head = this.body[this.body.length - 1].copy();
     this.body.unshift(head);
+  }
+
+  gameOver() {
+    let head = this.body[this.body.length - 1];
+    if (head.x > w-1 || head.x < 0 || head.y > h - 1 || head.y < 0) {
+      return true;
+    }
+
+    for (let i = 0; i < this.body.length - 1; i++) {
+      let part = this.body[i];
+      if (head.x === part.x && head.y === part.y) {
+        return true;
+      }
+    }
+    return false;
   }
 }

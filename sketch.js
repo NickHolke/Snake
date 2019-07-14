@@ -3,13 +3,18 @@ let rez = 20;
 let w;
 let h;
 let food;
+let score;
 
 function setup() {
   createCanvas(600,600);
-  snake = new Snake();
-  frameRate(7);
+  resetSketch();
+}
+
+function resetSketch() {
   w = floor(width/rez);
   h = floor(height/rez);
+  snake = new Snake();
+  frameRate(7);
   makeFood();
 }
 
@@ -39,9 +44,13 @@ function draw() {
     makeFood();
     snake.grow();
   }
-
   snake.update();
   snake.show();
+  if (snake.gameOver()) {
+    score = snake.score;
+    alert(`Game Over. Your score is: ${score}`);
+    resetSketch();
+  }
 
   noStroke();
   fill('red');
